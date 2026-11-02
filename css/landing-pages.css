@@ -40,3 +40,6 @@
 .seo-faq-item p { margin: 0.75rem 0 0; }
 .seo-faq-more { margin-top: 1.5rem; line-height: 1.9; }
 .seo-faq-more a { color: #2452f0; }
+
+/* Links inside page copy stay underlined so they are recognisable */
+.lp-prose a, .lp-more a, .lp-crumb a, .lp-faq a, .seo-faq-more a { text-decoration: underline; }
