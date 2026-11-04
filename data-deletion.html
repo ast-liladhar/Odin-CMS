@@ -857,7 +857,7 @@
                 <ul style="margin: 0.5rem 0 0; padding-left: 1.25rem;">
                   <li><strong>Token Erasure:</strong> The stored <code>accessToken</code> and <code>refreshToken</code> are immediately wiped from our production database.</li>
                   <li><strong>Metadata Clearing:</strong> Saved property IDs, channel labels, and configuration metadata are reset to empty.</li>
-                  <li><strong>Cache Invalidation:</strong> Any cached analytics data in our Redis memory layer (e.g., GA4 realtime snapshots, YouTube report caches) is permanently deleted.</li>
+                  <li><strong>Cache Invalidation:</strong> Provider-specific cached analytics data in our Redis memory layer (e.g., GA4 property mappings, Search Console error logs, and YouTube video cache counters) is invalidated immediately, and transient operational entries expire automatically via their short TTLs.</li>
                   <li><strong>Proactive Google Revocation:</strong> Our backend issues an asynchronous HTTP call to Google's OAuth revocation endpoint (<code>https://oauth2.googleapis.com/revoke</code>) to inform Google's servers that the grant has been terminated.</li>
                   <li><strong>Status Update:</strong> The integration status transitions to <code>DISCONNECTED</code>, preventing any further API calls.</li>
                 </ul>
@@ -961,8 +961,13 @@
                     </tr>
                     <tr>
                       <td><strong>Cached Analytics (Redis)</strong></td>
+                      <td>Provider keys invalidated immediately; transient caches expire via TTL (5m &ndash; 24h)</td>
                       <td>Purged immediately (0 seconds)</td>
-                      <td>Purged immediately (0 seconds)</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Historical Performance Snapshots (MongoDB)</strong></td>
+                      <td>Data collection halts immediately; historical records purge via MongoDB TTL indexes (14 to 400 days)</td>
+                      <td>Permanently purged within 30 days</td>
                     </tr>
                     <tr>
                       <td><strong>Integration Metadata (Channel / Property ID)</strong></td>

@@ -955,7 +955,7 @@
                 <p>When an integration is disconnected:</p>
                 <ul style="margin: 0.5rem 0 0; padding-left: 1.25rem;">
                   <li>Stored OAuth <code>accessToken</code> and <code>refreshToken</code> are wiped from our active databases immediately (0 seconds).</li>
-                  <li>Cached analytics records in Redis memory are purged immediately.</li>
+                  <li>Provider-specific cached analytics records in Redis memory are invalidated immediately.</li>
                   <li>Our backend makes a proactive call to Google's token revocation endpoint (<code>https://oauth2.googleapis.com/revoke</code>) to terminate the authorization grant.</li>
                   <li>The integration is placed in <code>DISCONNECTED</code> status, ceasing all automated synchronization.</li>
                 </ul>
