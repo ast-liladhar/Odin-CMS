@@ -4,12 +4,12 @@
   <meta charset="utf-8" />
   <link href="https://cdn.prod.website-files.com" rel="preconnect" />
   <title>Data Deletion Instructions - Odin CMS</title>
-  <meta content="Step-by-step instructions for disconnecting your Google account, revoking OAuth permissions, and requesting complete deletion of your data from Odin CMS." name="description" />
+  <meta content="Step-by-step instructions for disconnecting your Google, X, LinkedIn, and Threads accounts, revoking OAuth permissions, and requesting complete deletion of your data from Odin CMS." name="description" />
   <meta content="Data Deletion Instructions - Odin CMS" property="og:title" />
-  <meta content="Step-by-step instructions for disconnecting your Google account, revoking OAuth permissions, and requesting complete deletion of your data from Odin CMS." property="og:description" />
+  <meta content="Step-by-step instructions for disconnecting your Google, X, LinkedIn, and Threads accounts, revoking OAuth permissions, and requesting complete deletion of your data from Odin CMS." property="og:description" />
   <meta content="https://www.odincms.com/images/odin-cms-newsroom-ecosystem.png" property="og:image" />
   <meta content="Data Deletion Instructions - Odin CMS" name="twitter:title" />
-  <meta content="Step-by-step instructions for disconnecting your Google account, revoking OAuth permissions, and requesting complete deletion of your data from Odin CMS." name="twitter:description" />
+  <meta content="Step-by-step instructions for disconnecting your Google, X, LinkedIn, and Threads accounts, revoking OAuth permissions, and requesting complete deletion of your data from Odin CMS." name="twitter:description" />
   <meta content="https://www.odincms.com/images/odin-cms-newsroom-ecosystem.png" name="twitter:image" />
   <meta property="og:type" content="website" />
   <meta content="summary_large_image" name="twitter:card" />
@@ -45,7 +45,7 @@
       "@id": "https://www.odincms.com/data-deletion#webpage",
       "url": "https://www.odincms.com/data-deletion",
       "name": "Data Deletion Instructions - Odin CMS",
-      "description": "How to disconnect third-party integrations, revoke Google OAuth access, and request complete user data deletion in Odin CMS.",
+      "description": "How to disconnect third-party integrations, revoke Google, X, LinkedIn, and Threads access, and request complete user data deletion in Odin CMS.",
       "isPartOf": {
         "@id": "https://www.odincms.com/#website"
       }
@@ -773,7 +773,7 @@
           </p>
           <div class="legal-meta-bar">
             <div class="legal-meta-item"><strong>Effective Date:</strong> August 19, 2026</div>
-            <div class="legal-meta-item"><strong>Last Updated:</strong> November 4, 2026</div>
+            <div class="legal-meta-item"><strong>Last Updated:</strong> November 6, 2026</div>
             <div class="legal-meta-item"><strong>Support Email:</strong> <a href="mailto:connect@odincms.com" style="color: #2452f0;">connect@odincms.com</a></div>
           </div>
         </div>
@@ -785,7 +785,7 @@
             <ol class="legal-toc-list">
               <li><a href="#overview">1. Data Deletion Overview</a></li>
               <li><a href="#disconnect-in-app">2. Method 1: In-App Disconnect</a></li>
-              <li><a href="#revoke-google">3. Method 2: Google Security Portal</a></li>
+              <li><a href="#revoke-google">3. Method 2: Google, X, LinkedIn &amp; Threads Settings</a></li>
               <li><a href="#hard-delete-integration">4. Method 3: Delete Integration Record</a></li>
               <li><a href="#full-account-deletion">5. Method 4: Complete Account Erasure</a></li>
               <li><a href="#data-lifecycle">6. What Data Is Deleted vs Retained</a></li>
@@ -803,7 +803,7 @@
                 Odin CMS respects your privacy and complies with the <strong>Google API Services User Data Policy</strong>, <strong>EU/UK GDPR</strong>, <strong>California Consumer Privacy Act (CCPA/CPRA)</strong>, and <strong>India's Digital Personal Data Protection Act 2023</strong>.
               </p>
               <p>
-                When you connect your Google Account (for YouTube, Google Analytics 4, or Google Search Console) to Odin CMS, we only access the minimal scopes required to deliver your requested publishing and analytics features. You retain the absolute right to terminate this connection and permanently purge all associated tokens and cached metrics at any time.
+                When you connect your Google Account (for YouTube, Google Analytics 4, or Google Search Console) to Odin CMS, we only access the minimal scopes required to deliver your requested publishing and analytics features. The same applies if you connect X, LinkedIn, or Threads for publishing: we only request the permissions needed to publish what you choose to the connected account. You retain the absolute right to terminate any of these connections and permanently purge all associated tokens and cached metrics at any time.
               </p>
             </section>
 
@@ -834,8 +834,8 @@
                 <div class="legal-step-item">
                   <div class="legal-step-number">3</div>
                   <div class="legal-step-body">
-                    <h4>Locate the Connected Google Service</h4>
-                    <p>Find the integration card for <strong>YouTube</strong>, <strong>Google Analytics 4</strong>, or <strong>Google Search Console</strong>. Active connections will display a green "Connected" badge with channel or property details.</p>
+                    <h4>Locate the Connected Integration</h4>
+                    <p>Find the integration card for <strong>YouTube</strong>, <strong>Google Analytics 4</strong>, <strong>Google Search Console</strong>, <strong>X</strong>, <strong>LinkedIn</strong>, or <strong>Threads</strong>. Active connections will display a green "Connected" badge with channel or property details.</p>
                   </div>
                 </div>
 
@@ -859,6 +859,7 @@
                   <li><strong>Metadata Clearing:</strong> Saved property IDs, channel labels, and configuration metadata are reset to empty.</li>
                   <li><strong>Cache Invalidation:</strong> Provider-specific cached analytics data in our Redis memory layer (e.g., GA4 property mappings, Search Console error logs, and YouTube video cache counters) is invalidated immediately, and transient operational entries expire automatically via their short TTLs.</li>
                   <li><strong>Proactive Google Revocation:</strong> Our backend issues an asynchronous HTTP call to Google's OAuth revocation endpoint (<code>https://oauth2.googleapis.com/revoke</code>) to inform Google's servers that the grant has been terminated.</li>
+                  <li><strong>X, LinkedIn &amp; Threads:</strong> The stored tokens, account ID, name, username, and profile details are wiped immediately. Odin CMS does not call a revocation endpoint on these platforms, so also remove Odin CMS in the platform's settings (see Method 2 below). Posts already published remain on the platform and can be deleted there.</li>
                   <li><strong>Status Update:</strong> The integration status transitions to <code>DISCONNECTED</code>, preventing any further API calls.</li>
                 </ul>
               </div>
@@ -866,7 +867,7 @@
 
             <!-- Section 3 -->
             <section class="legal-section" id="revoke-google">
-              <h2>3. Method 2: Revoke Access via Google Account Security Portal</h2>
+              <h2>3. Method 2: Revoke Access via Your Google, X, LinkedIn, or Threads Account</h2>
               <p>
                 You do not need to rely on Odin CMS to revoke access. You can independently revoke Odin CMS's permissions directly from your personal or enterprise Google Account:
               </p>
@@ -899,6 +900,38 @@
 
               <p>
                 <em>Result:</em> Google's authentication servers immediately invalidate all access tokens and refresh tokens associated with Odin CMS. Any subsequent API request made by Odin CMS will fail with an HTTP 401 Unauthorized status, and our platform will mark the channel as <code>reconnect_required</code> or <code>disconnected</code>.
+              </p>
+            <h3 style="margin-top: 2rem;">Revoking X, LinkedIn, or Threads directly</h3>
+              <p>
+                To remove Odin CMS's access from inside the platform (recommended in addition to disconnecting in Odin CMS):
+              </p>
+              <div class="legal-step-list">
+                <div class="legal-step-item">
+                  <div class="legal-step-number">X</div>
+                  <div class="legal-step-body">
+                    <h4>X (formerly Twitter)</h4>
+                    <p>Open <a href="https://x.com/settings/connected_apps" target="_blank" rel="noopener" style="color: #2452f0; font-weight: 600;">x.com/settings/connected_apps</a>, select <strong>Odin CMS</strong>, and choose <strong>Revoke app permissions</strong>.</p>
+                  </div>
+                </div>
+
+                <div class="legal-step-item">
+                  <div class="legal-step-number">in</div>
+                  <div class="legal-step-body">
+                    <h4>LinkedIn</h4>
+                    <p>Open <a href="https://www.linkedin.com/psettings/permitted-services" target="_blank" rel="noopener" style="color: #2452f0; font-weight: 600;">linkedin.com/psettings/permitted-services</a> (Settings &amp; Privacy &rarr; Data privacy &rarr; Permitted services), select <strong>Odin CMS</strong>, and choose <strong>Remove</strong>.</p>
+                  </div>
+                </div>
+
+                <div class="legal-step-item">
+                  <div class="legal-step-number">@</div>
+                  <div class="legal-step-body">
+                    <h4>Threads</h4>
+                    <p>In your Threads or Instagram account settings, open the connected apps / website permissions list (Threads: <em>Settings &rarr; Account &rarr; Website permissions</em>), select <strong>Odin CMS</strong>, and remove it. Menu names can differ slightly between app versions.</p>
+                  </div>
+                </div>
+              </div>
+              <p>
+                <em>Result:</em> The platform invalidates the access Odin CMS was granted. Odin CMS can no longer publish to that account, and the integration card will show it needs to be reconnected.
               </p>
             </section>
 
@@ -958,6 +991,16 @@
                       <td><strong>OAuth Access &amp; Refresh Tokens</strong></td>
                       <td>Purged immediately (0 seconds)</td>
                       <td>Purged immediately (0 seconds)</td>
+                    </tr>
+                    <tr>
+                      <td><strong>X, LinkedIn &amp; Threads Tokens and Account Details</strong></td>
+                      <td>Purged immediately (0 seconds)</td>
+                      <td>Purged immediately (0 seconds)</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Posts Already Published to X, LinkedIn, or Threads</strong></td>
+                      <td>Not deleted by Odin CMS; they remain on the platform until you delete them there</td>
+                      <td>Not deleted by Odin CMS; they remain on the platform until you delete them there. Our publishing audit-log entries are deleted within 30 days</td>
                     </tr>
                     <tr>
                       <td><strong>Cached Analytics (Redis)</strong></td>
